@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f4ee;
+  --foreground: #102640;
+  --color-sand: #f7f4ee;
+  --color-sand-strong: #ebe1cf;
+  --color-ink: #102640;
+  --color-ink-soft: #34526d;
+  --color-gold: #b39358;
+  --color-gold-deep: #8e6d37;
+  --color-sea: #1c617b;
+  --color-palm: #2a4c40;
+  --color-white: #fffdf8;
+  --shadow-panel: 0 24px 80px rgba(16, 38, 64, 0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-sand);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), sans-serif;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-gold) 32%, white);
+}
+
+.container-shell {
+  margin-inline: auto;
+  width: min(1180px, calc(100% - 2rem));
+}
+
+.section-space {
+  padding-block: 5rem;
+}
+
+.display-title {
+  font-family: var(--font-display), serif;
+  letter-spacing: -0.03em;
+}
+
+.panel {
+  border: 1px solid rgba(16, 38, 64, 0.08);
+  background: rgba(255, 253, 248, 0.86);
+  box-shadow: var(--shadow-panel);
+  backdrop-filter: blur(18px);
+}
+
+.coastline {
+  position: relative;
+  overflow: hidden;
+}
+
+.coastline::after {
+  content: "";
+  position: absolute;
+  inset-inline: -5%;
+  bottom: -1.5rem;
+  height: 5rem;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 15% 35%, rgba(28, 97, 123, 0.22), transparent 26%),
+    radial-gradient(circle at 48% 45%, rgba(28, 97, 123, 0.32), transparent 28%),
+    radial-gradient(circle at 82% 40%, rgba(179, 147, 88, 0.22), transparent 26%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
